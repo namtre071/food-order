@@ -21,6 +21,22 @@
                         echo $_SESSION['remove'];
                         unset($_SESSION['remove']);
                     }
+                    if(isset($_SESSION['no-category'])){
+                        echo $_SESSION['no-category'];
+                        unset($_SESSION['no-category']);
+                    }
+                    if(isset($_SESSION['update'])){
+                        echo $_SESSION['update'];
+                        unset($_SESSION['update']);
+                    }
+                    if(isset($_SESSION['upload'])){
+                        echo $_SESSION['upload'];
+                        unset($_SESSION['upload']);
+                    }
+                    if(isset($_SESSION['remove1'])){
+                        echo $_SESSION['remove1'];
+                        unset($_SESSION['remove1']);
+                    }
                 ?>
                 <br>
                 <table class="tbl-full">
@@ -60,7 +76,7 @@
                                 <td><?=$featured ?></td>
                                 <td><?=$active ?></td>
                                 <td>
-                                    <a href="<?php echo SITEURL?>admin/update-admin.php?id=<?=$id?>" class="btn-secondary">Edit</a>
+                                    <a href="<?php echo SITEURL?>admin/update-category.php?id=<?=$id?>" class="btn-secondary">Edit</a>
                                     <a href="<?php echo SITEURL?>admin/delete-category.php?id=<?=$id?>&image_name=<?=$image?>"class="btn-danger">Delete</a>
                                 </td>
                             </tr>

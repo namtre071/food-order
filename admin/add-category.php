@@ -4,13 +4,13 @@
             <h1>Add category</h1>
             <br><br>
             <?php
-                if(isset($_SESSION['add'])){
-                    echo $_SESSION['add'];
-                    unset($_SESSION['add']);
+                if(isset($_SESSION['add1'])){
+                    echo $_SESSION['add1'];
+                    unset($_SESSION['add1']);
                 }
-                if(isset($_SESSION['upload'])){
-                    echo $_SESSION['upload'];
-                    unset($_SESSION['upload']);
+                if(isset($_SESSION['upload1'])){
+                    echo $_SESSION['upload1'];
+                    unset($_SESSION['upload1']);
                 }
             ?>
             <form action="" method="post" enctype="multipart/form-data">
@@ -71,17 +71,19 @@
             if(isset($_FILES['image']['name'])){
                 $image_name = $_FILES['image']['name'];
                 //autoramame
-                $ext = end(explode(".",$image_name));
-                $image_name = "FoodCategory_".rand(000,999).".".$ext;
-                $source_path = $_FILES['image']['tmp_name'] ;
+                if($image_name != ""){
+                    $ext = end(explode(".",$image_name));
+                    $image_name = "FoodCategory_".rand(000,999).".".$ext;
+                    $source_path = $_FILES['image']['tmp_name'] ;
 
-                $destination_path = "../images/category/".$image_name;
+                    $destination_path = "../images/category/".$image_name;
 
-                $upload = move_uploaded_file($source_path, $destination_path);
-                if($upload == false){
-                    $_SESSION['upload'] = "Upload failed";
-                    header("Location:".SITEURL."admin/add-category.php");
-                    die();
+                    $upload = move_uploaded_file($source_path, $destination_path);
+                    if($upload == false){
+                        $_SESSION['upload1'] = "Upload failed";
+                        header("Location:".SITEURL."admin/add-category.php");
+                        die();
+                    }
                 }
 
             }
@@ -91,11 +93,11 @@
             $sql = "insert into tbl_category set title='$title',featured='$featured',active='$active',image_name='$image_name'";
             $res = mysqli_query($conn, $sql);
             if($res== true){
-                $_SESSION['add']= "Added successfully"; 
+                $_SESSION['add1']= "Added successfully"; 
                 header("location:".SITEURL."admin/manage-category.php");
             }
             else{
-                $_SESSION['add']= "Something went wrong"; 
+                $_SESSION['add1']= "Something went wrong"; 
                 header("location:".SITEURL."admin/add-category.php");
             }
         }
